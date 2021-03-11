@@ -1,0 +1,15 @@
+Student No:
+Student Name:
+
+
+1.ChocolateController
+Result:
+Creating unique instance of Chocolate Boiler
+Returning instance of Chocolate Boiler
+Returning instance of Chocolate Boiler 
+
+
+2.SingletonTestDrive
+Result:
+headfirst.singleton.subclass.Singleton@7852e922
+headfirst.singleton.subclass.Singleton@7852e922

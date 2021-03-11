@@ -1,0 +1,25 @@
+Name: Nguyen Tran Nhat Duc
+Student ID: 518H0609
+
+*Lab 01:
+	Result: 
+		Student [code=1, name=Nguyen Tran Nhat Duc, birthDate=23/05/2000]
+		Student [code=3, name=Nguyen Hong Song Huong, birthDate=01/06/2001]
+		Student [code=2, name=Nguyen Manh Hung, birthDate=28/06/2000]
+		Student [code=5, name=Nguyen Manh Hai, birthDate=28/06/2000]
+		Student [code=4, name=Nguyen Manh, birthDate=28/06/2000]
+		
+		Student [code=1, name=Nguyen Tran Nhat Duc, birthDate=23/05/2000]
+		Student [code=2, name=Nguyen Manh Hung, birthDate=28/06/2000]
+		Student [code=3, name=Nguyen Hong Song Huong, birthDate=01/06/2001]
+		Student [code=4, name=Nguyen Manh, birthDate=28/06/2000]
+		Student [code=5, name=Nguyen Manh Hai, birthDate=28/06/2000]
+		
+		Student [code=1, name=Nguyen Tran Nhat Duc, birthDate=23/05/2000]
+		Student [code=2, name=Nguyen Manh Hung, birthDate=28/06/2000]
+		Student [code=4, name=Nguyen Manh, birthDate=28/06/2000]
+		Student [code=5, name=Nguyen Manh Hai, birthDate=28/06/2000]
+	
+*Lab 02:
+	true
+	false

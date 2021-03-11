@@ -1,0 +1,23 @@
+Name: Nguyen Tran Nhat Duc
+Student ID: 518H0609
+
+
+main.java:
+	* Input:
+		Input course name: Toan
+		Input number of creadits: 4
+		Input score: 10
+		Input course name: Ngu Van
+		Input number of creadits: 3
+		Input score: 6
+		Input course name: Hoa
+		Input number of 
+	* Result:
+			Name student: Nguyen Tran Nhat Duc
+		    0                Toan10.000000    4
+		    1             Ngu Van6.000000    3
+		    2                 Hoa8.000000    4
+		
+			GPA of student Nguyen Tran Nhat Duc: 8.181818
+			Level of student: Good
+		

@@ -1,0 +1,11 @@
+Name: Nguyen Tran Nhat Duc
+Student ID: 518H0609
+
+Lab 01:
+Draw Solid Square
+Draw Solid Rectangle
+Draw Solid Circle
+
+Draw  Square
+Draw  Rectangle
+Draw  Circle
