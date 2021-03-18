@@ -10,7 +10,7 @@ public class KhachHang extends Contact{
 	
 
 	public void inputData() {
-		System.out.print("Nhap lien he khach hang.");
+		System.out.print("Nhap lien he khach hang.\n");
 		setId();
 		setTenCongTy();
 		setUserName();
@@ -20,7 +20,7 @@ public class KhachHang extends Contact{
 	
 	public void setTenCongTy() {
 		System.out.print("Nhap ten cong ty: ");
-		this.tenCongTy = sc.next();
+		this.tenCongTy = sc.nextLine();
 	}
 	
 	@Override

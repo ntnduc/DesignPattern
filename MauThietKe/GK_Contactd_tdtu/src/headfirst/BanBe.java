@@ -8,7 +8,7 @@ public class BanBe extends Contact{
 	}
 	
 	public void inputData() {
-		System.out.print("Nhap lien he ban be.");
+		System.out.print("Nhap lien he ban be.\n");
 		setId();
 		setUserName();
 		setEmail();

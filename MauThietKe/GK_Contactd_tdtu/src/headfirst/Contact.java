@@ -12,22 +12,22 @@ public abstract class Contact {
 	
 	protected void setId() {
 		System.out.print("Nhap id: ");
-		this.id = sc.next();
+		this.id = sc.nextLine();
 	}
 	
 	protected void setUserName() {
 		System.out.print("Nhap Ten: ");
-		this.userName = sc.next();
+		this.userName = sc.nextLine();
 	}
 	
 	protected void setEmail() {
 		System.out.print("Nhap email: ");
-		this.email = sc.next();
+		this.email = sc.nextLine();
 	}
 	
 	protected void setPhone() {
 		System.out.print("Nhap so dien thoai: ");
-		this.phone = sc.next();
+		this.phone = sc.nextLine();
 	}
 
 	public String getUserName() {

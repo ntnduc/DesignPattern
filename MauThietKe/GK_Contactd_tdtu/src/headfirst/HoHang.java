@@ -16,7 +16,7 @@ public class HoHang extends Contact {
 	}
 	
 	public void inputData() {
-		System.out.print("Nhap lien he ho hang.");
+		System.out.print("Nhap lien he ho hang.\n");
 		setId();
 		setMoiQuanHe();
 		setUserName();
@@ -26,7 +26,7 @@ public class HoHang extends Contact {
 	
 	public void setMoiQuanHe() {
 		System.out.print("Nhap vao moi quan he: ");
-		this.moiQuanHe = sc.next();
+		this.moiQuanHe = sc.nextLine();
 	}
 
 	@Override
