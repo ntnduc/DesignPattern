@@ -44,12 +44,10 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
-			<item value="dp.tdtu"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="Lab04_FactoryMethod"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
