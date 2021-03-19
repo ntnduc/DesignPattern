@@ -13,6 +13,10 @@ public class Contacts {
 		System.out.print(_contactList.inputContact(3) + "\n");
 		
 		_contactList.display();
+		
+		_contactList.deleteContact("2");
+		
+		_contactList.display();
 	}
 
 }

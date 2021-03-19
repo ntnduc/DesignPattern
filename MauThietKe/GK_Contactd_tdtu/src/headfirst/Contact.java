@@ -10,6 +10,9 @@ public abstract class Contact {
 	
 	Scanner sc = new Scanner(System.in);
 	
+	EmailValidation emailValid = new EmailValidation();
+	PhoneValidation phoneValid = new PhoneValidation();
+	
 	protected void setId() {
 		System.out.print("Nhap id: ");
 		this.id = sc.nextLine();
@@ -23,11 +26,19 @@ public abstract class Contact {
 	protected void setEmail() {
 		System.out.print("Nhap email: ");
 		this.email = sc.nextLine();
+		while (this.emailValid.validate(this.email)==false) {
+			System.out.print("Nhap sai dinh dang email. Nhap lai email: ");
+			this.email = sc.nextLine();
+		}
 	}
 	
 	protected void setPhone() {
 		System.out.print("Nhap so dien thoai: ");
 		this.phone = sc.nextLine();
+		while(this.phoneValid.validate(this.phone)==false) {
+			System.out.print("Nhap sai dinh dang so dien thoai. Nhap lai sdt: ");
+			this.phone = sc.nextLine();
+		}
 	}
 
 	public String getUserName() {
