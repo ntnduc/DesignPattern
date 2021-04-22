@@ -10,13 +10,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class Screen extends JFrame {
 	public JFrame mainFrame;
@@ -26,6 +31,8 @@ public class Screen extends JFrame {
 	public JButton reloadContact;
 	public JButton okButton;
 	public JButton cancelButton;
+	public JButton saveButton;
+	public JButton findContact;
 	
 	public JTextField search;
 	public JTextField nameField;
@@ -36,14 +43,20 @@ public class Screen extends JFrame {
 	public JLabel nameLabel;
 	public JLabel noPhoneLabel;
 	public JLabel emailLabel;
+	public JLabel showInforLabel;
 	
+	DatabaseContact contactUser = new DatabaseContact();
+	JTable USERTABLE = tableContact();
 	
 	public void controlScreen() {
-		DatabaseContact contactUser = new DatabaseContact();
+		
+		//Variable all method
+		
+		
 		
 		JPanel panelControl = new JPanel(new FlowLayout());
 		JPanel panelSearch = new JPanel(new FlowLayout());
-		
+		JPanel panelTable = new JPanel(new FlowLayout());
 			
 		mainFrame = new JFrame("Contact");
 			//Screen Control
@@ -51,18 +64,40 @@ public class Screen extends JFrame {
 			panelControl.setBackground(Color.blue);
 			addContact = new JButton("Add Contact");
 			deleteContact = new JButton("Delete Contact");
-			reloadContact = new JButton("Reload Contact");
-			
-			addContact.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					_showScreenAddNewContact();
-				}
-			});
+			reloadContact = new JButton("Show Contact");
+			saveButton = new JButton("SAVE");
+			//ACTION BUTTON
+				//add contact
+				addContact.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						_showScreenAddNewContact();
+					}
+				});
+				//reload contact
+				reloadContact.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						_showScreenFullContact();
+					}
+				});
+				//Save contact
+				saveButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						WriteFile write = new WriteFile();
+						if(write.writeData()==true) {
+							write.writeData();
+							System.out.print("Lưu ngon lành");
+						}else {
+							System.out.print("Ngu roi");
+						}
+						
+					}
+				});
 			//set layout panel control
 			panelControl.add(addContact);
 			panelControl.add(deleteContact);
 			panelControl.add(reloadContact);
-			
+			panelControl.add(saveButton);
 		mainFrame.add(panelControl);
 			//Screen panel search
 			panelSearch.setPreferredSize(new Dimension(500,70));
@@ -71,20 +106,31 @@ public class Screen extends JFrame {
 			messageLabel = new JLabel("Search Contact:");
 			messageLabel.setFont(new Font(messageLabel.getFont().getName(), Font.BOLD, 20));
 			messageLabel.setForeground(Color.blue);
-			search = new JTextField("Enter contact to search",18);
+			search = new JTextField(18);
+			findContact= new JButton("Find");
+			findContact.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					_showScreenMessageContact(search.getText());
+				}
+			});
 			//set layout panel search
 			panelSearch.setLayout(new BorderLayout());
 			panelSearch.add(messageLabel, BorderLayout.CENTER);
 			panelSearch.add(search, BorderLayout.SOUTH);
+			panelSearch.add(findContact, BorderLayout.AFTER_LINE_ENDS);
 			
 		mainFrame.add(panelSearch);
-		
+			//Screen table contact
+			
+//			panelTable.add(tableContact());
+//		mainFrame.add(panelTable);
 		//set layout Frame
 		mainFrame.setLayout(new FlowLayout());
 		mainFrame.setLayout(new FlowLayout());
 		mainFrame.repaint();
 	}
 	
+	//Screen add infor contact
 	private void _showScreenAddNewContact() {
 		JDialog screenContact = new JDialog (this, Dialog.ModalityType.APPLICATION_MODAL);
 		screenContact.setLayout(new BorderLayout());
@@ -130,7 +176,15 @@ public class Screen extends JFrame {
 			okButton.setForeground(Color.blue);
 			okButton.addActionListener(new ActionListener() {		//add action to button ok
 				public void actionPerformed(ActionEvent e) {
-					dispose();
+					 AddNewContact testContact = new AddNewContact(nameField.getText(), noPhoneField.getText(), emailField.getText());
+					 if(testContact.handRequest() != null) {
+						 testContact.handRequest();
+						 System.out.print("Ngon Lành");
+						 dispose();
+					 }else {
+						 System.out.print("Thua");
+					 }
+					
 				}
 			});
 			_control.add(okButton);
@@ -151,4 +205,72 @@ public class Screen extends JFrame {
 		screenContact.setVisible(true);
 		
 	}
+	//end method show screen add infor
+	
+	//start screen message find contact
+	private void _showScreenMessageContact(String nameContact) {
+		JDialog _showScreen = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
+		_showScreen.setLayout(new BorderLayout());
+		ArrayList<Contact> allContacts = contactUser.getAllContacts();
+		System.out.print(nameContact+"\n");
+		for(Contact itemContact : allContacts) {
+			if(nameContact.equals(itemContact.getName())) {
+				showInforLabel = new JLabel("Name: "+itemContact.getName()+"\nPhone: "+itemContact.getNoPhone()+"\nEmail: "+itemContact.getEmailAddress());	
+				System.out.print("Run here");
+				break;
+			}
+			showInforLabel = new JLabel("NULL");
+		}
+		_showScreen.add(showInforLabel);
+		_showScreen.setBounds(300, 300, 450, 200);
+		_showScreen.setVisible(true);
+	}
+	//end screen message find contact
+	
+	//star screen table contact in data
+	private void _showScreenFullContact() {
+		JDialog screenShowTable = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
+		screenShowTable.setLayout(new BorderLayout());
+		
+		JPanel panelTable = new JPanel();
+		JScrollPane jsp = new JScrollPane(tableContact());
+		okButton = new JButton("OK");
+		okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+						}
+					});
+		panelTable.add(jsp, BorderLayout.CENTER);
+		screenShowTable.add(panelTable, BorderLayout.CENTER);
+		screenShowTable.add(okButton, BorderLayout.PAGE_END);
+		screenShowTable.setBounds(300, 300, 500, 300);
+		screenShowTable.setVisible(true);
+	}
+	protected JTable tableContact() {
+		ArrayList<Contact> allContacts = contactUser.getAllContacts();
+		String [] col= {"Index","Name","Phone Number","Email"};
+		DefaultTableModel tableModel = new DefaultTableModel();
+		tableModel.setColumnIdentifiers(col);
+		JTable contactTable = new JTable();
+		
+		for(int i = 0; i < allContacts.size()-1; i++) {
+			Object[] obj = {i,allContacts.get(i).getName(), allContacts.get(i).getNoPhone(), allContacts.get(i).getEmailAddress()};
+//			Object[] obj = {"Dữ liệu cột 1","Dữ liệu cột 2","Dữ liệu cột 3"};
+			tableModel.addRow(obj);
+		}
+		
+		
+		
+		tableModel.setColumnCount(4);
+		tableModel.setRowCount(allContacts.size()-1);
+		
+		contactTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		contactTable.setModel(tableModel);
+		
+		
+		
+		
+		return contactTable; 
+	}//end screen show all contact
 }
+

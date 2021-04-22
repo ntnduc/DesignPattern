@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class FindNameContact implements State{
 
 	@Override
-	public Contact handRequest(ArrayList<Contact> allContacts) {
+	public Contact handRequest() {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter you name want to find: ");

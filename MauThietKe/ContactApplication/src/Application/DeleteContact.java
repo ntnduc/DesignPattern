@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class DeleteContact implements State{
 
 	@Override
-	public Contact handRequest(ArrayList<Contact> allContacts) {
+	public Contact handRequest() {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class FindNoPhone implements State {
 
 	@Override
-	public Contact handRequest(ArrayList<Contact> allContacts) {
+	public Contact handRequest() {
 		Scanner sc = new Scanner(System.in);
 		Ivalidation valid = new ValidNoPhone();
 		
