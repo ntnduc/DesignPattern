@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -91,6 +92,13 @@ public class Screen extends JFrame {
 							System.out.print("Ngu roi");
 						}
 						
+					}
+				});
+				
+				//Delete contact
+				deleteContact.addActionListener(new ActionListener() {
+					public void actionPerformed (ActionEvent e) {
+						_showScreenDeleteContact();
 					}
 				});
 			//set layout panel control
@@ -176,13 +184,14 @@ public class Screen extends JFrame {
 			okButton.setForeground(Color.blue);
 			okButton.addActionListener(new ActionListener() {		//add action to button ok
 				public void actionPerformed(ActionEvent e) {
-					 AddNewContact testContact = new AddNewContact(nameField.getText(), noPhoneField.getText(), emailField.getText());
-					 if(testContact.handRequest() != null) {
-						 testContact.handRequest();
-						 System.out.print("Ngon Lành");
+					 Ivalidation valid = new ValidContact();
+					 Contact testContact = new Contact(nameField.getText(), noPhoneField.getText(), emailField.getText());
+					 
+					 if (valid.valid(testContact)) {
+						 contactUser.setState(new AddNewContact(nameField.getText(), noPhoneField.getText(), emailField.getText()));
+						 contactUser.applyState();
+						 contactUser.applyState();
 						 dispose();
-					 }else {
-						 System.out.print("Thua");
 					 }
 					
 				}
@@ -212,13 +221,13 @@ public class Screen extends JFrame {
 		JDialog _showScreen = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
 		_showScreen.setLayout(new BorderLayout());
 		ArrayList<Contact> allContacts = contactUser.getAllContacts();
-		System.out.print(nameContact+"\n");
-		for(Contact itemContact : allContacts) {
-			if(nameContact.equals(itemContact.getName())) {
-				showInforLabel = new JLabel("Name: "+itemContact.getName()+"\nPhone: "+itemContact.getNoPhone()+"\nEmail: "+itemContact.getEmailAddress());	
-				System.out.print("Run here");
-				break;
-			}
+//		}
+
+		contactUser.setState(new FindNameContact(nameContact));
+		contactUser.applyState();
+		if(contactUser.getResultState() != null) {
+			showInforLabel = new JLabel("Name: "+contactUser.getResultState().getName()+"\nPhone: "+contactUser.getResultState().getNoPhone()+"\nEmail: "+contactUser.getResultState().getEmailAddress());
+		}else {
 			showInforLabel = new JLabel("NULL");
 		}
 		_showScreen.add(showInforLabel);
@@ -226,6 +235,33 @@ public class Screen extends JFrame {
 		_showScreen.setVisible(true);
 	}
 	//end screen message find contact
+	
+	//start screen delete contact
+	private void _showScreenDeleteContact() {
+		JDialog _showScreen = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
+		_showScreen.setLayout(new FlowLayout());
+		JPanel panel = new JPanel();
+		BoxLayout baxLayout = new BoxLayout(panel,BoxLayout.Y_AXIS);
+		
+		messageLabel = new JLabel("Nhập vào vị trí liên hệ bạn muốn xóa");
+		JTextField _id = new JTextField();
+		_id.setText("ID");
+		okButton = new JButton("OK");
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contactUser.setState(new DeleteContact( Integer.parseInt(_id.getText()) ));
+				contactUser.applyState();
+				dispose();
+			}
+		});
+		panel.add(messageLabel);
+		panel.add(_id);
+		panel.add(okButton);
+		
+		_showScreen.add(panel);
+		_showScreen.setBounds(300, 300, 450, 200);
+		_showScreen.setVisible(true);
+	}
 	
 	//star screen table contact in data
 	private void _showScreenFullContact() {

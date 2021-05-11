@@ -17,6 +17,10 @@ public class DatabaseContact {
 		this.state.handRequest();
 	}
 	
+	public Contact getResultState() {
+		return this.state.handRequest();
+	}
+	
 	public void addContactToData(Contact newContact) {
 		allContacts.add(newContact);
 	}

@@ -22,7 +22,7 @@ public class AddNewContact implements State {
 		Ivalidation valid = new ValidContact();
 		
 		
-		Contact newContact = new Contact(name, noPhone, email);	//create new contact
+		Contact newContact = new Contact(this.name, this.noPhone, this.email);	//create new contact
 		
 		valid = new ValidContact();
 		if(valid.valid(newContact)) {

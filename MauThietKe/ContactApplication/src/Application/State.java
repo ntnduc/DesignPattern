@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 //user State pattern
 public interface State {
-	ArrayList<Contact> allContacts = new ArrayList();
+	ArrayList<Contact> allContacts = new DatabaseContact().getAllContacts();
 	Contact handRequest();
 }

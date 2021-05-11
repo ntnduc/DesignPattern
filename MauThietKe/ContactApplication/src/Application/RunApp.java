@@ -7,12 +7,6 @@ public class RunApp {
 	private static RunApp uniqueinstance;
 	public void run() {
 		ReadData testData = new ReadData();
-//		if(testData.readData() == true) {
-//			testData.readData();
-//		}else {
-//			System.out.print("File lỗi rồi ĐỨC ơiiiii!");
-//		}
-		
 		testData.readData();
 		Screen screen = new Screen();
 		
